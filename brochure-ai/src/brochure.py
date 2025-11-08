@@ -1,183 +1,102 @@
-#Generacion de folleto
 import os
 import logging
-from typing import Dict,Optional
-from datetime import datetime
-from openai import OpenAI
+from typing import List, Any, Dict
+import json
+import re
 
-logger=logging.getLogger(__name__)
+from .llm_ollama import chat_ollama
 
-MOCK_MODE= os.getenv('MOCK_MODE','false').lower() == 'true'
-
-def generate_brochure_mock(company_name:str, pages:Dict[str,str], tone:str)->str:
-    """
-    Genera un folleto de ejemplo en modo MOCK
-    Args:
-        company_name: Nombre de la compañia
-        pages: Paginas
-        tone: TOno
-
-    Returns:
-        Genera el contenido de cada pagina
-    """
-    logger.info('Generating mock pages')
-    date_str = datetime.today().strftime('%Y/%m/%d')
-
-    return f"""#{company_name}
-    ## Innovación y Excelencia en Tecnología
-
-    ### Qué Hacemos
-    
-    {company_name} es una empresa líder en el sector tecnológico que se dedica a proporcionar soluciones innovadoras para empresas y profesionales. Nuestro enfoque se centra en la calidad, la innovación y el servicio al cliente.
-    
-    Trabajamos constantemente para mejorar nuestros productos y servicios, manteniéndonos a la vanguardia de las últimas tendencias tecnológicas.
-    
-    ### Nuestros Productos y Servicios
-    
-    - **Soluciones empresariales**: Herramientas diseñadas para optimizar procesos y aumentar la productividad
-    - **Plataforma tecnológica**: Infraestructura robusta y escalable
-    - **Soporte y consultoría**: Equipo experto disponible para ayudar en cada paso
-    - **Innovación continua**: Actualizaciones regulares y nuevas funcionalidades
-    
-    ### Para Quién Trabajamos
-    
-    Servimos a empresas de diversos sectores:
-    - Tecnología y software
-    - Servicios financieros
-    - Educación y formación
-    - Retail y e-commerce
-    
-    ### Cultura y Valores
-    
-    En {company_name}, creemos en:
-    - **Innovación**: Buscamos constantemente nuevas formas de resolver problemas
-    - **Colaboración**: Trabajamos juntos para lograr objetivos comunes
-    - **Transparencia**: Mantenemos comunicación abierta y honesta
-    - **Excelencia**: Nos esforzamos por superar expectativas
-    
-    ### Únete a Nuestro Equipo
-    
-    Estamos siempre en búsqueda de talento excepcional. Ofrecemos:
-    - Ambiente de trabajo flexible
-    - Oportunidades de crecimiento profesional
-    - Proyectos desafiantes e innovadores
-    - Equipo colaborativo y diverso
-    
-    ### Contacto
-    
-    ¿Interesado en conocer más sobre {company_name}?
-    
-    Visita nuestro sitio web para más información sobre nuestros productos, servicios y oportunidades de carrera.
-    
-    ---
-    
-    *Contenido generado a partir de fuentes públicas del sitio web en la fecha {date_str}. Este folleto es un resumen no oficial generado automáticamente. Verificar información antes de uso externo.*
-
-"""
-
-def generate_brochure_llm(company_name:str, pages:Dict[str,str], tone:str,
-                          model:str, api_key:str)->str:
-    """
-    Genera un folleto de ejemplo en modo LLM
-    Args:
-        company_name: Nombre de la empresa
-        pages: Contenidos compilados
-        tone: Tono del folleto
-        model: Modelo a usar
-        api_key: API KEY de openAI
-
-    Returns:
-        Folleto en markdown
-    """
-
-    try:
-        client = OpenAI(api_key=api_key)
-    except ImportError:
-        logger.error("OpenAI API key invalid. Use MOCK_MODE=true.")
-        raise
-
-    tone_instruction={
-        "formal": "Usa un tono profesional, claro y directo.",
-        "humorístico": "Usa un tono amigable y creativo, con toques de humor cuando sea apropiado, pero manteniendo profesionalismo."
-    }.get(tone, "Usa un tono profesional.")
-
-    system_prompt=f"""
-    Eres un asistente que analiza el contenido limpio de varias páginas de una empresa y redacta un folleto breve en Markdown para clientes, inversores y candidatos.
-
-    {tone_instruction}
-    
-    Estructura del folleto:
-    - Título + slogan breve
-    - Qué hacemos (1–2 párrafos)
-    - Productos/Servicios (viñetas)
-    - Para quién (industrias/beneficios)
-    - Casos o clientes destacados (si la información existe)
-    - Cultura y valores (viñetas o párrafo breve)
-    - Carreras y beneficios (solo si existe información sobre esto)
-    - CTA (cómo contactar)
-    - Nota ética al final
-    
-    Usa subtítulos (##, ###) y viñetas. El folleto debe ser breve (2-3 páginas impresas) pero informativo.
-"""
-    #Preparar contenido
-    content_parts=[]
-    for page_type, content in pages.items():
-        content_parts.append(f"==={page_type.upper()}===\n{content}\n")
-
-    full_content="\n\n".join(content_parts)
-
-    user_prompt=f"""
-    Empresa: {company_name}
-    
-    Contenido de las páginas:
-    
-    {full_content}
-    
-    Genera un folleto corporativo profesional en Markdown.
-"""
-    try:
-        response =client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role":"system","content": system_prompt},
-                {"role":"user","content": user_prompt},
-            ],
-            temperature=0.7,
-            max_tokens=2000
-        )
-        brochure=response.choices[0].message.content
-
-        # Agregar nota etica si no está
-        date_str = datetime.now().strftime("%Y-%m-%d")
-        if "generado" not in brochure.lower():
-            brochure += f"\n\n---\n\n*Contenido generado a partir de fuentes publicas del sitio web en la fecha {date_str}. Este folleto es un resumen no oficial generado automáticamente. Verificar información antes de uso externo.*"
-
-        logger.info("Brochure generated successfully")
-        return brochure
-
-    except Exception as e:
-        logger.error(f"Error generating brochure with LLM: {e}")
-        raise
+logger = logging.getLogger(__name__)
+MOCK_MODE = os.getenv("MOCK_MODE", "false").lower() == "true"
 
 
-def generate_brochure(company_name: str, pages: Dict[str, str],
-                      tone: str = "formal",
-                      api_key: Optional[str] = None,
-                      model: str = "gpt-4o-mini") -> str:
-    """
-    Punto de entrada principal para generacion de folleto.
+def _extract_text_from_pages(pages: List[Any]) -> List[str]:
+    texts: List[str] = []
+    for p in pages:
+        if isinstance(p, dict):
+            txt = p.get("summary") or p.get("content") or ""
+        else:
+            txt = str(p)
+        if txt:
+            texts.append(txt)
+    return texts
 
-    Args:
-        company_name: Nombre de la empresa
-        pages: Contenidos compilados
-        tone: Tono del folleto
-        api_key: API key (opcional para modo mock)
-        model: Modelo a usar
 
-    Returns:
-        Folleto en Markdown
-    """
-    if MOCK_MODE or not api_key:
+def _facts_from_pages(pages: List[Dict]) -> List[Dict]:
+    facts = []
+    for p in pages[:10]:
+        if isinstance(p, dict):
+            facts.append({
+                "type": p.get("type", "page"),
+                "url": p.get("url", ""),
+                "title": p.get("title", ""),
+                "headings": (p.get("headings") or [])[:6],
+                "description": (p.get("description") or "")[:320],
+            })
+    return facts
+
+
+def _sanitize_brochure(md: str) -> str:
+    md = re.sub(r"\[[^\]]+\]", "", md)                  # quita [placeholders]
+    md = re.sub(r"(?m)^\s*[-*]\s*$\n?", "", md)         # bullets vacíos
+    md = re.sub(r"(?m)^\s*#{1,3}\s*$\n?", "", md)       # headings vacíos
+    md = re.sub(r"\n{3,}", "\n\n", md)                  # colapsa saltos
+    return md.strip()
+
+
+def generate_brochure_mock(company_name: str, pages: List[Any], tone: str = "formal") -> str:
+    # SOLO cuando se usa --mock o MOCK_MODE=true
+    company = company_name or "Nuestra compañía"
+    brochure = f"# {company} – Folleto Corporativo\n\n"
+    brochure += "> Socio tecnológico para acelerar tu roadmap digital.\n\n"
+    brochure += "## Resumen Ejecutivo\n\n"
+    brochure += (f"{company} ayuda a organizaciones que quieren profesionalizar su capa digital, "
+                 "automatizar procesos clave y tomar decisiones basadas en datos.\n\n")
+    brochure += "## Líneas de Servicio\n\n"
+    brochure += "### Consultoría y Estrategia\n- Roadmap tecnológico.\n- Quick wins.\n- Gobierno y priorización.\n\n"
+    brochure += "### Implementación Tecnológica\n- Integración de canales.\n- Automatización de procesos.\n\n"
+    brochure += "## Próximos Pasos\n\nAgenda una sesión de descubrimiento para priorizar iniciativas.\n"
+    return brochure
+
+
+def generate_brochure_llm(company_name: str, pages: List[Any], tone: str = "formal") -> str:
+    texts = _extract_text_from_pages(pages)
+    joined_content = "\n\n".join(texts[:8])
+    facts_json = json.dumps(_facts_from_pages(pages), ensure_ascii=False, indent=2)
+
+    system_prompt = (
+        "Eres un copywriter B2B. Entrega SOLO Markdown. PROHIBIDO placeholders o datos inventados. "
+        "Usa explícitamente nombres propios, títulos, headings, descripciones y URLs de los FACTS. "
+        "Si algo no aparece en FACTS/Contenido, omítelo. Tono: " + tone
+    )
+
+    user_prompt = (
+        f"Empresa: {company_name}\n\n"
+        f"FACTS (JSON fiable):\n{facts_json}\n\n"
+        "Contenido libre (texto plano adicional):\n" + joined_content + "\n\n"
+        "Redacta un folleto anclado en FACTS. Estructura EXACTA (omite secciones sin evidencia):\n"
+        f"# {company_name} – Folleto Corporativo\n\n"
+        "## Resumen Ejecutivo\n"
+        "• 1–2 párrafos con misión/propósito y foco real detectado en FACTS.\n\n"
+        "## Líneas de Servicio / Programas / Recursos\n"
+        "• Bullets con capacidades, programas, publicaciones o iniciativas que aparezcan en títulos/headings.\n\n"
+        "## Comunidad / Ecosistema / Sectores\n"
+        "• Bullets con comunidades, eventos, públicos o sectores citados en FACTS.\n\n"
+        "## Evidencias / Casos / Recursos\n"
+        "• 4–8 bullets con nombres de páginas/secciones/recursos concretos (usa los títulos/headings).\n\n"
+        "## Próximos Pasos\n"
+        "• CTA coherente con lo observado (contribuir, unirse, descargar, participar, contactar).\n"
+    )
+
+    draft = chat_ollama(system_prompt, user_prompt)
+    cleaned = _sanitize_brochure(draft)
+    return cleaned or "# Folleto\n\n(El modelo devolvió salida vacía.)"
+
+
+def generate_brochure(company_name: str, pages: List[Any], tone: str = "formal", mock: bool = False) -> str:
+    if mock or MOCK_MODE:
+        logger.info("Generating brochure in MOCK mode (explicit)")
         return generate_brochure_mock(company_name, pages, tone)
-    else:
-        return generate_brochure_llm(company_name, pages, tone, api_key, model)
+
+    logger.info("Generating brochure with OLLAMA")
+    return generate_brochure_llm(company_name, pages, tone)

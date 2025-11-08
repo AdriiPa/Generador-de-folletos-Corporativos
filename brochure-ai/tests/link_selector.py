@@ -5,7 +5,7 @@ from typing import List, Dict
 from urllib.parse import urlparse, urljoin
 import re
 
-from .llm_ollama import chat_ollama
+from .llm_ollama import (chat_ollama)
 
 logger = logging.getLogger(__name__)
 MOCK_MODE = os.getenv("MOCK_MODE", "false").lower() == "true"

@@ -1,71 +1,80 @@
-#Compilacion de contenidos
 import logging
-from typing import Dict
-from scraping import fetch_page,clean_text
+from typing import Dict, List, Any
+from bs4 import BeautifulSoup
+
+from .scraping import fetch_page, clean_text
 
 logger = logging.getLogger(__name__)
 
-def compile_pages(selected_links:Dict,main_html:str)->Dict[str,str]:
-    """
-    Descarga y compila el contenido de las paginas seleccionadas
-    Args:
-        selected_links: DIct con los enlaces seleccionados por el LLM
-        main_html: HTML de la pagina principal
 
-    Returns:
-        Dict con el contenido de las paginas seleccionadas
-    """
-
-    pages={
-        "landing": clean_text(main_html)
+def extract_metadata(html: str, url: str, page_type: str = "page") -> dict:
+    soup = BeautifulSoup(html or "", "html.parser")
+    title = (soup.title.string or "").strip() if soup.title and soup.title.string else ""
+    headings = [h.get_text(strip=True) for h in soup.select("h1, h2")][:10]
+    meta_desc = ""
+    md = soup.find("meta", attrs={"name": "description"})
+    if md and md.get("content"):
+        meta_desc = md["content"].strip()
+    og = soup.find("meta", attrs={"property": "og:description"})
+    if not meta_desc and og and og.get("content"):
+        meta_desc = og["content"].strip()
+    site_name = ""
+    ogs = soup.find("meta", attrs={"property": "og:site_name"})
+    if ogs and ogs.get("content"):
+        site_name = ogs["content"].strip()
+    return {
+        "url": url,
+        "type": page_type,
+        "title": title,
+        "headings": headings,
+        "description": meta_desc,
+        "site_name": site_name
     }
 
-    for item in selected_links.get("links",[]):
-        page_type = item.get("type","unknown")
-        url =item.get("url")
 
+def compile_pages(selected: Dict, html_main: str, base_url: str) -> List[Dict[str, Any]]:
+    """
+    selected = {"links": [{"type": "...", "url": "..."}, ...]}
+    """
+    pages: List[Dict[str, Any]] = []
+
+    # Home SIEMPRE = base_url
+    home_dict: Dict[str, Any] = {
+        "type": "home",
+        "url": base_url,
+        "content": clean_text(html_main),
+    }
+    home_dict.update(extract_metadata(html_main, home_dict["url"], "home"))
+    home_dict["summary"] = home_dict["description"][:500] or home_dict["content"][:600]
+    logger.info("Compilador de la pagina home: %s chars", len(home_dict["content"]))
+    pages.append(home_dict)
+
+    # Resto de páginas seleccionadas
+    for item in selected.get("links", []):
+        url = item.get("url")
+        ptype = item.get("type", "page")
         if not url:
             continue
-
         try:
-            html= fetch_page(url)
-            cleaned_html = clean_text(html)
-
-            #Limpiar longitud del texto (max 5000 caracteres)
-            if len(cleaned_html) >5000:
-                cleaned_html = cleaned_html[:5000]
-
-            pages[page_type] = cleaned_html
-            logger.info(f"Compilador de la pagina {page_type}: {len(cleaned_html)} chars")
-
+            html = fetch_page(url)
         except Exception as e:
-            logger.warning(f"Failed to fecth {url}: {e}")
+            logger.error("Excepción inesperada en fetch_page(%s): %s", url, e)
             continue
+        if not html:
+            continue
+
+        content = clean_text(html)
+        page_dict: Dict[str, Any] = {"type": ptype, "url": url, "content": content}
+        page_dict.update(extract_metadata(html, url, ptype))
+        page_dict["summary"] = (page_dict.get("description") or "")[:500] or content[:600]
+        logger.info("Compilador de la pagina %s: %s chars", ptype, len(content))
+        pages.append(page_dict)
 
     return pages
 
-def summarize_content(pages:Dict[str,str], max_chars:int=3000)->Dict[str,str]:
-    """
-    Reduce el contenido de cada pagina para no exceder limites de tokens
-    Args:
-        pages: Dict con contenidos
-        max_chars: Maximo de caracteres de la pagina
 
-    Returns:
-        Dict con el contenido de cada pagina
-    """
-
-    summarized={}
-    for page_type, content in pages.items():
-        if len(content) > max_chars:
-            #tomar inicio y fin
-            half= max_chars//2
-            summarized[page_type]=(
-                content[:half] +
-                "\n\n[...contenido omitido...]\n\n" +
-                content[-half:]
-            )
-        else:
-            summarized[page_type] = content
-
-    return summarized
+def summarize_content(pages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    for p in pages:
+        if not p.get("summary"):
+            p["summary"] = (p.get("description") or "")[:500] or (p.get("content") or "")[:600]
+    return pages

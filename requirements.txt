@@ -1,0 +1,7 @@
+markdown
+pytest
+python-dotenv~=1.2.1
+openai~=2.7.1
+requests~=2.32.5
+beautifulsoup4~=4.14.2
+urllib3~=2.5.0

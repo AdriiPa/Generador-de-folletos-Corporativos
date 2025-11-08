@@ -1,115 +1,87 @@
-#Web scraping responsable
-from venv import logger
-
+# Web scraping responsable
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
-from typing import Tuple, List, Dict
+from typing import Tuple, List
 import logging
 import time
-
-from urllib3.util import url
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-USER_AGENT="BrochureAI/1.0 (Educational Project; contact@example.com)"
-REQUEST_DELAY=1.0 #Segundos entre requests
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Safari/537.36"
+REQUEST_DELAY = 1.0  # segundos entre requests
 
-def fetch_page(url:str, timeout :int =10)->str:
-    """Descarga una pagina web respetando good practices.
-        Args:
-            url: URL a descargar.
-            timeout: timeout en segundos
 
-        Returns:
-            HTML de la pagina.
-    """
-    headers={
-        "User-Agent":USER_AGENT,
-        'Accept': ' text/html.application/xhtml+xml',
-        'Accept-Language': 'en-US,en;q=0.9,es;q=0.8',
+def fetch_page(url: str, timeout: int = 15) -> str:
+    """Descarga una página web respetando good practices."""
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
     }
-
     try:
-        logger.info(f"Fetching page {url}")
-        time.sleep(REQUEST_DELAY) #Rate limiting
-        response = requests.get(url, headers=headers, timeout=timeout)
-        response.raise_for_status()
-        return response.text
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Error fetching page {url}: {e}")
-        raise
+        logger.info("Fetching page %s", url)
+        time.sleep(REQUEST_DELAY)  # rate limiting
+        resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+        resp.raise_for_status()
+        ctype = resp.headers.get("Content-Type", "")
+        if "html" not in ctype:
+            logger.warning("Contenido no HTML en %s: %s", url, ctype)
+            return ""
+        return resp.text
+    except requests.RequestException as e:
+        logger.error("Error fetching page %s: %s", url, e)
+        return ""  # NO propagamos excepción
 
-def extract_links(html:str, base_url:str)->List[str]:
-    """
-    Extrae todos los enlaces de un html.
 
-    Args:
-        html: Contenido HTML de la pagina.
-        base_url: URL base para resolver enlaces relativos.
-
-    Returns:
-         Lista de URLs absolutas
-    """
-    soup= BeautifulSoup(html, 'html.parser')
-    links = []
+def extract_links(html: str, base_url: str) -> List[str]:
+    """Extrae todos los enlaces (solo mismo dominio), resolviendo relativos."""
+    soup = BeautifulSoup(html or "", "html.parser")
+    links: List[str] = []
+    base_host = urlparse(base_url).netloc.lower()
+    if base_host.startswith("www."):
+        base_host = base_host[4:]
 
     for a_tag in soup.find_all('a', href=True):
-        href= a_tag['href']
-
-        #Ignorar anclas y javascript
-        if href.startswith('#') or href.startswith('javascript:'):
+        href = a_tag['href'].strip()
+        # Ignorar anclas y javascript
+        if href.startswith('#') or href.lower().startswith('javascript:'):
             continue
-
-        #Convertir a Url absoluta
-        absolute_url= urljoin(base_url, href)
-
-        #Filtrar solo URLs del mismo dominio
-        if urlparse(absolute_url).netloc == urlparse(base_url).netloc:
+        absolute_url = urljoin(base_url, href)
+        host = urlparse(absolute_url).netloc.lower()
+        if host.startswith("www."):
+            host = host[4:]
+        # Filtrar solo URLs del mismo dominio
+        if host == base_host or host.endswith("." + base_host):
             links.append(absolute_url)
 
-    return list(set(links)) #Quitar suplicados
+    # Quitar duplicados manteniendo orden
+    seen = set()
+    deduped = []
+    for u in links:
+        if u not in seen:
+            seen.add(u)
+            deduped.append(u)
+    return deduped
 
-def clean_text(html:str)->str:
-    """
-    Extrae texto limpio de HTML, eliminado scripts,styles,etc
 
-    Args:
-         html:Contenido HTML de la pagina.
-    Returns:
-        Texto limpio de HTML.
-    """
-
-    soup= BeautifulSoup(html, 'html.parser')
-
-    #Eliminar elementos que no quiero
-    for elements in soup(["script", "style", "nav", "footer", "header", "aside"]):
-        elements.decompose()
-
-    #Obtener texto
-    text=soup.get_text(separator='\n', strip=True)
-
-    #Limpiar lineas vacias duplicadas
-    lines=[line.strip() for line in text.split('\n') if line.strip()]
+def clean_text(html: str) -> str:
+    """Extrae texto limpio de HTML, eliminando scripts, styles, etc."""
+    soup = BeautifulSoup(html or "", 'html.parser')
+    for el in soup(["script", "style", "nav", "footer", "header", "aside"]):
+        el.decompose()
+    text = soup.get_text(separator='\n', strip=True)
+    lines = [line.strip() for line in text.split('\n') if line.strip()]
     return '\n'.join(lines)
 
-def scrape_and_extract(url:str)->Tuple[str,List[str]]:
-    """
-    Funcion principal: descarga pagina y extra enlaces.
 
-    Args:
-        url: URL principal de la empresa
-
-    Returns:
-        Tupla (HTML, lista de enlaces)
-    """
-
-    try:
-        html= fetch_page(url)
-        links =extract_links(html, url)
-        logger.info(f"Extracting links {len(links)} links form {url}")
-        return  html , links
-    except Exception as e:
-        logger.error(f"Error scraping page {url}: {e}")
-        raise
+def scrape_and_extract(url: str) -> Tuple[str, List[str]]:
+    """Función principal: descarga página y extrae enlaces."""
+    html = fetch_page(url)
+    if not html:
+        logger.error("Página base vacía o no descargada: %s", url)
+        return "", []
+    links = extract_links(html, url)
+    logger.info("Extracting links %d links form %s", len(links), url)
+    return html, links
