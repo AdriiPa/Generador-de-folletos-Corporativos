@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcd4b254-5707-437b-9933-f2f9cb2ea455" name="Changes" comment="" />
+    <list default="true" id="dcd4b254-5707-437b-9933-f2f9cb2ea455" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Generador_Folletos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Generador_Folletos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/python_software_foundation_brochure.html" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/python_software_foundation_brochure.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/python_software_foundation_brochure.md" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/python_software_foundation_brochure.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -24,15 +36,118 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for test_scraping.test_clean_text_removes_scripts.executor": "Run",
+    "Python tests.Python tests for test_scraping.test_clean_text_removes_styles.executor": "Run",
+    "Python tests.Python tests for test_scraping.test_extract_links_basic.executor": "Run",
+    "Python tests.Python tests for test_scraping.test_extract_links_external_filtered.executor": "Run",
+    "Python tests.Python tests for test_scraping.test_normalize_url_relative.executor": "Run",
+    "Python tests.Python tests in test_scraping.py.executor": "Run",
+    "Python.cli.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "develop",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/adrian/BigData e IA/Modelos IA/Generador_Folletos",
+    "last_opened_file_path": "/Users/adrian/BigData e IA/Modelos IA/Generador_Folletos/brochure-ai/tests",
     "to.speed.mode.migration.done": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/brochure-ai/tests" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python tests.Python tests for test_scraping.test_clean_text_removes_scripts">
+    <configuration name="Python tests for test_scraping.test_clean_text_removes_scripts" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Generador_Folletos" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_scraping.test_clean_text_removes_scripts&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_scraping.test_extract_links_basic" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Generador_Folletos" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_scraping.test_extract_links_basic&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_scraping.test_extract_links_external_filtered" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Generador_Folletos" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_scraping.test_extract_links_external_filtered&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_scraping.test_normalize_url_relative" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Generador_Folletos" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_scraping.test_normalize_url_relative&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_scraping.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="Generador_Folletos" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/brochure-ai/tests/test_scraping.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests for test_scraping.test_clean_text_removes_scripts" />
+        <item itemvalue="Python tests.Python tests in test_scraping.py" />
+        <item itemvalue="Python tests.Python tests for test_scraping.test_extract_links_external_filtered" />
+        <item itemvalue="Python tests.Python tests for test_scraping.test_normalize_url_relative" />
+        <item itemvalue="Python tests.Python tests for test_scraping.test_extract_links_basic" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

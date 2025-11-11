@@ -1,25 +1,23 @@
 # Python Software Foundation – Folleto Corporativo
 
 ## Resumen Ejecutivo
-The Python Software Foundation is a charitable organization dedicated to supporting the Python programming language and its vast, diverse community. Our mission is to promote the growth of Python by providing resources, infrastructure, and grants to individuals and organizations.
+The official home of the Python Programming Language. As the foundation behind the popular programming language, our mission is to promote and support the growth of the Python community.
 
 ## Líneas de Servicio / Programas / Recursos
-• Functions Defined: Learn about the basics of Python programming
-• Compound Data Types: Explore the capabilities of Python's data types
-• Intuitive Interpretation: Discover how Python makes it easy to learn and use
-• All the Flow You’d Expect: Experience the flexibility and versatility of Python
-• Quick & Easy to Learn: Start coding with Python today!
+• Functions Defined: Learn about the power of Python's syntax.
+• Compound Data Types: Discover how Python handles complex data structures.
+• Intuitive Interpretation: Understand how Python's code is easy to read and write.
+• All the Flow You’d Expect: Experience the flexibility and versatility of Python programming.
 
 ## Comunidad / Ecosistema / Sectores
-• Our Community: A vast, diverse group of individuals and organizations using Python
-• Getting Started: Resources for new users and developers
-• Community Survey: Share your thoughts and opinions on the Python community
+• Our Community: Explore the vast, diverse, and growing community of Python users.
+• Applications: Learn about the various industries and sectors that use Python, from scientific computing to web development.
 
 ## Evidencias / Casos / Recursos
-• Success Stories: Read about real-world applications and projects built with Python
-• Our Blog: Stay up-to-date with the latest news, trends, and insights from the Python world
-• PSF Newsletter Signup: Subscribe to our newsletter for updates on Python and its community
-• Job Board: Explore career opportunities in Python development
+• Welcome to Python.org: The official home of the Python Programming Language.
+• About Python: Discover why Python is powerful, fast, and easy to learn.
+• Our Success Stories: Read about real-world applications and projects built with Python.
+• PSF Newsletter Signup: Stay up-to-date with the latest news and developments in the Python community.
 
 ## Próximos Pasos
-Join us in supporting the growth of Python by contributing to our mission. Learn more about how you can get involved, or explore our resources and initiatives today!
+• Join the Python Community: Contribute to the growth of the Python ecosystem by becoming a member of the PSF.
