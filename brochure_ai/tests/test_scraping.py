@@ -3,7 +3,7 @@ test_scraping.py - Tests para el módulo de scraping
 """
 import pytest
 from .scraping import clean_text, extract_links
-from .link_selector import normalize_url
+from .link_selector import _normalize_url
 
 
 def test_clean_text_removes_scripts():
@@ -58,7 +58,7 @@ def test_normalize_url_relative():
     """Test normalización de URLs relativas."""
     base = "https://example.com"
     relative = "/about"
-    result = normalize_url(relative, base)
+    result = _normalize_url(relative, base)
     assert result == "https://example.com/about"
 
 
@@ -66,7 +66,7 @@ def test_normalize_url_absolute():
     """Test que URLs absolutas no cambian."""
     base = "https://example.com"
     absolute = "https://example.com/careers"
-    result = normalize_url(absolute, base)
+    result = _normalize_url(absolute, base)
     assert result == absolute
 
 
@@ -80,12 +80,12 @@ def test_extract_links_external_filtered():
         </body>
     </html>
     """
-    base_url = "https://example.com"
+    base_url = "https://external.com"
     links = extract_links(html, base_url)
 
     # Solo enlaces internos
     for link in links:
-        assert 'example.com' in link
+        assert 'external.com' in link
 
 
 if __name__ == "__main__":
