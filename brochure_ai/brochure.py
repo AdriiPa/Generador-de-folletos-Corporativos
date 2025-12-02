@@ -208,27 +208,49 @@ def details(url:str, mock:bool = False,max_chars:int=12000) -> str:
     pages= summarize_content(pages)
     return _pages_for_prompt(pages,max_chars=max_chars)
 
-def translate_brochure(brochure_text:str, target_lang:str="en")->str:
+def translate_brochure(
+    brochure_text: str,
+    target_lang: str = "en",
+) -> str:
     """
-    Traduce un folleto manteniendo EXACTAMENTE  el formato Markdown.
-    Se apoya en el mismo backend LLM (Ollama)
+    Traduce el folleto a target_lang manteniendo el formato Markdown.
+    Fuerza al modelo a responder solo en el idioma destino, sin mezclar.
     """
-    system_prompt = {
-        "Eres un traductor profesional"
-        "Tu objetivo es traducir el texto manteniendo EXACTAMENTE el mismo formato Markdown."
-        "(encabezados, listas, enfasis) y la misa estructura"
-        "No añadas comentarios ni explicaciones."
-    }
+    system_prompt = (
+        "You are a professional translator. "
+        "You ALWAYS respond only in the target language, "
+        "never in the source language. "
+        "You MUST preserve the original Markdown structure "
+        "(headings, lists, bold, links, etc.)."
+    )
 
     user_prompt = f"""
-Traduce el siguiente folleto al idioma : {target_lang}.
-No cambies la estructura de secciones ni el formato Markdown.
+Target language: {target_lang}
 
-Texto:
-\"\"\"markdown
-{brochure_text}
-\"\"\"
-""".strip()
+Instructions:
+- Translate ALL the text of the brochure into the target language.
+- KEEP the exact same Markdown structure and headings.
+- DO NOT leave any sentence or word in the original language.
+- DO NOT add explanations, comments, or extra text.
+- Output ONLY the translated brochure.
 
-    translated= chat_ollama(system_prompt, user_prompt)
+Example:
+[EXAMPLE START]
+
+Source (Spanish):
+# Resumen Ejecutivo
+Nuestro objetivo es ayudar a organizaciones a adoptar IA abierta.
+
+Target (English):
+# Executive Summary
+Our goal is to help organizations adopt open AI.
+
+[EXAMPLE END]
+
+Now translate this brochure:
+
+```markdown
+{brochure_text}""".strip()
+
+    translated = chat_ollama(system_prompt, user_prompt)
     return translated.strip() if translated else brochure_text

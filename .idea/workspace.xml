@@ -5,27 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcd4b254-5707-437b-9933-f2f9cb2ea455" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/brochure_ai/brochure.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brochure_ai/cli.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brochure_ai/compiler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brochure_ai/link_selector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brochure_ai/scraping.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brochure_ai/tests/link_selector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/brochure_ai/tests/scraping.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/src/brochure.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/src/cli.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/src/compiler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/src/link_selector.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/src/llm_ollama.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/llm_ollama.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/src/scraping.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/tests/link_selector.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/tests/llm_ollama.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/tests/llm_ollama.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/tests/scraping.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/brochure-ai/tests/test_scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/tests/test_scraping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brochure_ai/brochure.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/brochure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brochure_ai/llm_ollama.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/llm_ollama.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/hugging_face_brochure.html" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/hugging_face_brochure.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/hugging_face_brochure.md" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/hugging_face_brochure.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,28 +34,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests for test_scraping.test_clean_text_removes_scripts.executor": "Run",
-    "Python tests.Python tests for test_scraping.test_clean_text_removes_styles.executor": "Run",
-    "Python tests.Python tests for test_scraping.test_extract_links_basic.executor": "Run",
-    "Python tests.Python tests for test_scraping.test_extract_links_external_filtered.executor": "Run",
-    "Python tests.Python tests for test_scraping.test_normalize_url_absolute.executor": "Run",
-    "Python tests.Python tests for test_scraping.test_normalize_url_relative.executor": "Run",
-    "Python tests.Python tests in test_scraping.py.executor": "Run",
-    "Python.cli.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "extras",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/adrian/BigData e IA/Modelos IA/Generador_Folletos/brochure-ai/tests",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for test_scraping.test_clean_text_removes_scripts.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_scraping.test_clean_text_removes_styles.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_scraping.test_extract_links_basic.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_scraping.test_extract_links_external_filtered.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_scraping.test_normalize_url_absolute.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_scraping.test_normalize_url_relative.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_scraping.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cli.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;extras&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/adrian/BigData e IA/Modelos IA/Generador_Folletos/brochure-ai/tests&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/brochure-ai/tests" />
