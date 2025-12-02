@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="dcd4b254-5707-437b-9933-f2f9cb2ea455" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/brochure_ai/brochure.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/brochure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brochure_ai/llm_ollama.py" beforeDir="false" afterPath="$PROJECT_DIR$/brochure_ai/llm_ollama.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/hugging_face_brochure.html" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/hugging_face_brochure.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/hugging_face_brochure.md" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/hugging_face_brochure.md" afterDir="false" />
+>>>>>>> extras
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +44,10 @@
     &quot;Python tests.Python tests for test_scraping.test_clean_text_removes_styles.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for test_scraping.test_extract_links_basic.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for test_scraping.test_extract_links_external_filtered.executor&quot;: &quot;Run&quot;,
+<<<<<<< HEAD
+=======
+    &quot;Python tests.Python tests for test_scraping.test_normalize_url_absolute.executor&quot;: &quot;Run&quot;,
+>>>>>>> extras
     &quot;Python tests.Python tests for test_scraping.test_normalize_url_relative.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in test_scraping.py.executor&quot;: &quot;Run&quot;,
     &quot;Python.cli.executor&quot;: &quot;Run&quot;,
@@ -45,7 +56,11 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+<<<<<<< HEAD
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+=======
+    &quot;git-widget-placeholder&quot;: &quot;extras&quot;,
+>>>>>>> extras
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/adrian/BigData e IA/Modelos IA/Generador_Folletos/brochure-ai/tests&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
@@ -56,11 +71,12 @@
       <recent name="$PROJECT_DIR$/brochure-ai/tests" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/brochure-ai" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_scraping.test_clean_text_removes_scripts">
-    <configuration name="Python tests for test_scraping.test_clean_text_removes_scripts" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests in test_scraping.py">
+    <configuration name="Python tests for brochure_ai.tests.test_scraping.test_clean_text_removes_scripts" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="Generador_Folletos" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -71,11 +87,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_scraping.test_clean_text_removes_scripts&quot;" />
+      <option name="_new_target" value="&quot;brochure_ai.tests.test_scraping.test_clean_text_removes_scripts&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_scraping.test_extract_links_basic" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for brochure_ai.tests.test_scraping.test_extract_links_external_filtered" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="Generador_Folletos" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -86,11 +102,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_scraping.test_extract_links_basic&quot;" />
+      <option name="_new_target" value="&quot;brochure_ai.tests.test_scraping.test_extract_links_external_filtered&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_scraping.test_extract_links_external_filtered" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for brochure_ai.tests.test_scraping.test_normalize_url_absolute" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="Generador_Folletos" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -101,11 +117,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_scraping.test_extract_links_external_filtered&quot;" />
+      <option name="_new_target" value="&quot;brochure_ai.tests.test_scraping.test_normalize_url_absolute&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_scraping.test_normalize_url_relative" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for brochure_ai.tests.test_scraping.test_normalize_url_relative" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="Generador_Folletos" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -116,7 +132,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_scraping.test_normalize_url_relative&quot;" />
+      <option name="_new_target" value="&quot;brochure_ai.tests.test_scraping.test_normalize_url_relative&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -131,17 +147,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/brochure-ai/tests/test_scraping.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/brochure_ai/tests/test_scraping.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_scraping.test_clean_text_removes_scripts" />
         <item itemvalue="Python tests.Python tests in test_scraping.py" />
-        <item itemvalue="Python tests.Python tests for test_scraping.test_extract_links_external_filtered" />
-        <item itemvalue="Python tests.Python tests for test_scraping.test_normalize_url_relative" />
-        <item itemvalue="Python tests.Python tests for test_scraping.test_extract_links_basic" />
+        <item itemvalue="Python tests.Python tests for brochure_ai.tests.test_scraping.test_extract_links_external_filtered" />
+        <item itemvalue="Python tests.Python tests for brochure_ai.tests.test_scraping.test_normalize_url_absolute" />
+        <item itemvalue="Python tests.Python tests for brochure_ai.tests.test_scraping.test_clean_text_removes_scripts" />
+        <item itemvalue="Python tests.Python tests for brochure_ai.tests.test_scraping.test_normalize_url_relative" />
       </list>
     </recent_temporary>
   </component>
